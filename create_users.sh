@@ -32,11 +32,16 @@ for user in $@; do
             echo "${folder} does not exist, creating .."
             mkdir "/home/${user}/${folder}"
         fi
-        # Skapa filen `welcome.txt` inom användarens hem
-        echo "Välkommen ${user}" > /home/${user}/welcome.txt
-        for a_user in $(compgen -u); do
-            echo ${a_user} >> /home/${user}/welcome.txt
-        done
+    done
+    # Skapa filen `welcome.txt` inom användarens hem
+    echo "Välkommen ${user}" > /home/${user}/welcome.txt
+done
+
+# Processen delas upp i två loops: först skapas alla användare och sedan så genereras användarlistorna.
+# Detta eftersom tidigare så genererades användarlistorna i samma loop där användaren skapades och då missar `gencomp -u` användarna som kommer därefter.
+for user in $@; do
+    for a_user in $(compgen -u); do
+        echo ${a_user} >> /home/${user}/welcome.txt
     done
     # Korrigera rättigheter genom hela hemmappen
     chown -R ${user}:${group_id} /home/${user}
