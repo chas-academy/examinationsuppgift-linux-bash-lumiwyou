@@ -1,3 +1,6 @@
+# create_users.sh
+# Author: Lumi Hyväri <lumi.hyvari@gmail.com>
+# Description: automated user environment creation script
 #!/bin/bash
 
 # RootID
