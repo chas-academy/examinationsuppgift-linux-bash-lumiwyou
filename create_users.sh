@@ -34,6 +34,9 @@ for user in $@; do
         fi
         # Skapa filen `welcome.txt` inom användarens hem
         echo "Välkommen ${user}" > /home/${user}/welcome.txt
+        for a_user in $(compgen -u); do
+            echo ${a_user} >> /home/${user}/welcome.txt
+        done
     done
     # Korrigera rättigheter genom hela hemmappen
     chown -R ${user}:${group_id} /home/${user}
