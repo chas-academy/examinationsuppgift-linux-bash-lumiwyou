@@ -12,7 +12,7 @@ default_folders=(
 )
 
 # Behörighetskontroll
-if [ $EUID -ne root_id ]; then
+if [ $EUID -ne ${root_id} ]; then
     # Om inte root, skriv ut felmeddelande och avsluta med felkod
     echo "Du behöver exekvera detta skript som root-användare (0)"
     exit 1
